@@ -9,13 +9,13 @@ app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/", async (req, res) => {
-    try {
-      const linkDis = await Link.find();
-      console.log(linkDis);
-    } catch (err) {
-      console.error("Error retrieving short link:", err);
-    }
-  res.render("index");
+  try {
+    const linkDis = await Link.find();
+    console.log(linkDis);
+    res.render("index", (shortUrls = linkDis));
+  } catch (err) {
+    console.error("Error retrieving short link:", err);
+  }
 });
 
 app.post("/", async (req, res) => {
@@ -23,7 +23,7 @@ app.post("/", async (req, res) => {
   try {
     const originalUrl = req.body.url;
     const shortenedLink = new Link({
-      originalUrl
+      originalUrl,
     });
     console.log(shortenedLink.originalUrl);
     await shortenedLink.save();

@@ -71,11 +71,14 @@ margin: auto;
             </th>
           </tr>  
           <tbody>
-            <tr>
-                <td class="btn-primary">www.we.com hhhhhh</td>
-                <td>shor.com</td>
-                <td>0</td>
-            </tr>
+            <% shortUrls.forEach(url => {%>
+                <tr>
+                    <td class="btn-primary"><a href="<%=url.originalUrl  %>"><%=url.originalUrl %></a></td>
+                    <td><a href="<%= url.shortUrl %>"><%= url.shortUrl %></a></td>
+                    <td><%= url.clicks %></td>
+                </tr> 
+            <%  }); %>
+            
           </tbody>
         </thead>
     </table>
