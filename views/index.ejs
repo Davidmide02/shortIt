@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title><!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
-
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Shortner</title>
     <style>
         body{
             background-color: antiquewhite;
@@ -17,7 +18,7 @@ flex-direction: column;
 justify-content: center;
 align-items: center;
 padding: 4rem;
-width: 60%;
+width: 80%;
 height: 80vh;
 margin: auto;
         }
@@ -25,16 +26,23 @@ margin: auto;
             /* background-color: green; */
             border: 2px solid rgb(199, 194, 194);
             border-collapse: collapse;
+            width: 100%;
+            overflow-x: visible;
         }
         table thead th, td{
-            border: 2px solid black;
+            /* border: 2px solid black; */
             padding: 1rem;
+            text-align: left;
+            
         }
         table thead th{
             background-color: blanchedalmond;
             border-collapse: collapse;
             /* border-collapse: separate; */
 
+        }
+        table tr:hover{
+            background-color: gainsboro;
         }
 
         form{
@@ -43,6 +51,14 @@ margin: auto;
 
         form input, form button{
             padding: 0.5rem 1.5rem;
+        }
+
+        .fa-solid{
+            cursor: pointer;
+            /* color: bisque; */
+        }
+        .fa-solid:hover{
+            color: white;
         }
 
     </style>
@@ -69,25 +85,20 @@ margin: auto;
             <th>
                 count
             </th>
+            <th>Action</th>
           </tr>  
           <tbody>
             <% shortUrls.forEach(url => {%>
                 <tr>
                     <td class="btn-primary"><a href="<%=url.originalUrl  %>"><%=url.originalUrl %></a></td>
-                    <td><a href="<%= url.shortUrl %>"><%= url.shortUrl %></a></td>
+                    <td><a href="/short/<%= url.shortUrl%>" target="_blank"><%= url.shortUrl %></a></td>
                     <td><%= url.clicks %></td>
+                    <td><i class="fa-solid fa-trash"><a href="/delete/<%= url._id%>"></a></i></td>
                 </tr> 
             <%  }); %>
             
           </tbody>
         </thead>
     </table>
-
-
-    <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
-</div>
-  
 </body>
 </html>

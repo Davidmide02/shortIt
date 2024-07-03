@@ -1,6 +1,6 @@
 const express = require("express");
 const mongooes = require("mongoose");
-const Link = require("./models/short");
+const UrlDb = require("./models/short");
 const db = require("./models/db");
 
 const app = express();
@@ -10,8 +10,8 @@ app.use(express.urlencoded({ extended: true }));
 
 app.get("/", async (req, res) => {
   try {
-    const linkDis = await Link.find();
-    console.log(linkDis);
+    const linkDis = await UrlDb.find();
+
     res.render("index", (shortUrls = linkDis));
   } catch (err) {
     console.error("Error retrieving short link:", err);
@@ -19,13 +19,12 @@ app.get("/", async (req, res) => {
 });
 
 app.post("/", async (req, res) => {
-  console.log(req.body.url);
   try {
     const originalUrl = req.body.url;
-    const shortenedLink = new Link({
+    const shortenedLink = new UrlDb({
       originalUrl,
     });
-    console.log(shortenedLink.originalUrl);
+
     await shortenedLink.save();
   } catch (err) {
     console.error("Error creating short link:", err);
@@ -34,8 +33,38 @@ app.post("/", async (req, res) => {
   res.redirect("/");
 });
 
-app.listen(process.env.PORT || 3001);
-// N1NhiEkN9X6qRc45
-// davidmide07
-// cahHSo9fNwDrRGyM
-// mongodb+srv://davidmide_db:<password>@cluster0.tso68h5.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+app.get("/short/:shorturl", async (req, res) => {
+  // extract the shorturl from the params
+  const short = req.params.shorturl;
+
+  // find from db
+  UrlDb.findOne({ shortUrl: short })
+    .then((suc) => {
+      suc.clicks++;
+      suc.save();
+      res.redirect(suc.originalUrl);
+    })
+    .catch((err) => {
+      res.statusCode(404);
+      res.redirect(err);
+    });
+});
+
+app.get("/delete/:UrlId", async (req, res) => {
+  // extract the id
+  const id = req.params.UrlId;
+
+  // use id to find and delete
+  UrlDb.findByIdAndDelete(id)
+    .then((suc) => res.redirect("/"))
+    .catch((err) => {
+      res.statusCode(404);
+      res.redirect(err);
+    });
+});
+
+app.listen(process.env.PORT || 3000);
+
+//  Restructure the styling
+// delete url
+//
