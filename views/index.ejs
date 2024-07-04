@@ -12,25 +12,23 @@
             box-sizing: border-box;
         }
         .container{
-background-color: white;
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-padding: 4rem;
-width: 80%;
-height: 80vh;
-margin: auto;
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 4rem;
+            width: 80%;
+            height: 80vh;
+            margin: auto;
         }
         table{
-            /* background-color: green; */
             border: 2px solid rgb(199, 194, 194);
             border-collapse: collapse;
             width: 100%;
             overflow-x: visible;
         }
         table thead th, td{
-            /* border: 2px solid black; */
             padding: 1rem;
             text-align: left;
             
@@ -125,6 +123,8 @@ margin-bottom: 1.2rem;
     <script>
 function copyFn (){
     const value =  document.getElementById("text").value;
+
+    // create a temporary element with value to hold the value to be copied
     const textarea = document.createElement('textarea');
     textarea.value = value;
     document.body.appendChild(textarea);
@@ -132,9 +132,6 @@ function copyFn (){
     document.execCommand("copy") 
     document.body.removeChild(textarea);
     alert("Copied to clipboard:  " +value)
-    
-    console.log(value);
-    console.log("clicked here");
 }
     </script>
 </body>

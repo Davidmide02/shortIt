@@ -12,7 +12,7 @@ async function main() {
   await mongoose
     .connect(uri)
     .then((rr) => console.log("connected succefully"))
-    .catch((err) => console.log("error connect to database",err.errmsg));
+    .catch((err) => console.log("error connecting to database", err.errmsg));
 }
 
 module.exports = db;

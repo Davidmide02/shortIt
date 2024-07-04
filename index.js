@@ -2,24 +2,21 @@ const express = require("express");
 const mongooes = require("mongoose");
 const UrlDb = require("./models/short");
 const db = require("./models/db");
-
 const app = express();
 
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
 
-app.get("/", async (req, res) => {
+app.get("/",async (req, res) => {
   try {
     const linkDis = await UrlDb.find();
-    console.log("hostbame okfd", req.hostname);
-    console.log("header:", req.headers.host);
-    // console.log(req.);
-    shje = req.headers.host;
-    res.render("index", { shortUrls: linkDis, port: shje });
+   
+    const port = req.headers.host;
+    res.render("index", { shortUrls: linkDis, port });
   } catch (err) {
     console.error("Error retrieving short link:", err);
   }
-});
+} );
 
 app.post("/", async (req, res) => {
   try {
@@ -67,3 +64,4 @@ app.get("/delete/:UrlId", async (req, res) => {
 });
 
 app.listen(process.env.PORT || 3000);
+
