@@ -2,7 +2,7 @@
 
 - This a backend project built with Nodejs, Expressjs,shortId, MongoDb and Mongooes.
 
-- This project is to put my backend skills into practive 
+- This project is to put my backend skills into practice and learn while building
 
 ## Tool 
 - Nodejs
