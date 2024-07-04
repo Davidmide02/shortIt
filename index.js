@@ -2,10 +2,6 @@ const express = require("express");
 const mongooes = require("mongoose");
 const UrlDb = require("./models/short");
 const db = require("./models/db");
-require("dotenv").config()
-
-const db_username = process.env.USERNAMEDB
-console.log("heree",db_username);
 
 const app = express();
 
@@ -69,6 +65,4 @@ app.get("/delete/:UrlId", async (req, res) => {
 
 app.listen(process.env.PORT || 3000);
 
-//  Restructure the styling
-// delete url
-//
+
