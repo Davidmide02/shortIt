@@ -47,19 +47,39 @@ margin: auto;
 
         form{
             padding: 2rem;
+            width: 100%;
+            /* background-color: green; */
+            display: grid;
+            grid-template-columns: repeat(30%);
         }
 
         form input, form button{
             padding: 0.5rem 1.5rem;
         }
-
+        form button:hover{
+            background-color: blanchedalmond;
+            font-weight: bold;
+            padding: 0.5rem 1.5rem;
+        }
+form input{
+margin-bottom: 1.2rem;
+}
         .fa-solid{
             cursor: pointer;
+            padding: 0.2rem;
+            font-size: 1.3rem;color: black;
             /* color: bisque; */
         }
         .fa-solid:hover{
             color: white;
         }
+        .action{
+            display: flex;
+        }
+        .action a i{
+            margin-right: .5rem;
+        }
+       
 
     </style>
 </head>
@@ -93,12 +113,29 @@ margin: auto;
                     <td class="btn-primary"><a href="<%=url.originalUrl  %>"><%=url.originalUrl %></a></td>
                     <td><a href="/short/<%= url.shortUrl%>" target="_blank"><%= url.shortUrl %></a></td>
                     <td><%= url.clicks %></td>
-                    <td><i class="fa-solid fa-trash"><a href="/delete/<%= url._id%>"></a></i></td>
+                    <td class="action"><a href="/delete/<%= url._id%>"><i class="fa-solid fa-trash"></i></a><i class="fa-solid fa-copy" onclick="copyFn()"></i></td>
+                    <input type="text" value="<%=port%>/short/<%= url.shortUrl%>" hidden id="text">
                 </tr> 
             <%  }); %>
             
           </tbody>
         </thead>
     </table>
+    
+    <script>
+function copyFn (){
+    const value =  document.getElementById("text").value;
+    const textarea = document.createElement('textarea');
+    textarea.value = value;
+    document.body.appendChild(textarea);
+    textarea.select()
+    document.execCommand("copy") 
+    document.body.removeChild(textarea);
+    alert("Copied to clipboard:  " +value)
+    
+    console.log(value);
+    console.log("clicked here");
+}
+    </script>
 </body>
 </html>

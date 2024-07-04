@@ -11,8 +11,11 @@ app.use(express.urlencoded({ extended: true }));
 app.get("/", async (req, res) => {
   try {
     const linkDis = await UrlDb.find();
-
-    res.render("index", (shortUrls = linkDis));
+    console.log("hostbame okfd", req.hostname);
+    console.log("header:", req.headers.host);
+    // console.log(req.);
+    shje = req.headers.host;
+    res.render("index", { shortUrls: linkDis, port: shje });
   } catch (err) {
     console.error("Error retrieving short link:", err);
   }
@@ -64,5 +67,3 @@ app.get("/delete/:UrlId", async (req, res) => {
 });
 
 app.listen(process.env.PORT || 3000);
-
-
